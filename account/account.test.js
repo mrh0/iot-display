@@ -1,5 +1,12 @@
+/* 
+    Internal account component test.
+    AUTHOR: Group 10 KTH
+    VERSION: 2020-05-08-A
+*/
+
 const {login, create, check, addDisplay, getUserDisplays, addDisplaySession, addUserSession, sessionsCleaner} = require("./account");
 
+//Add a user session and checks if the session is valid.
 test('Add a user session.', () => {
     const id = "testid";
     const session = addUserSession(id)
@@ -11,7 +18,9 @@ test('Add a user session.', () => {
     })
 });
 
-test('Clean session remove.', () => {
+/*Adds a session and preforms a simulated cleanup for 5h past session was added
+  Tests the session and makes sure it is no longer valid.*/
+test('Clean session: remove.', () => {
     const id = "testid";
     const session = addUserSession(id)
     sessionsCleaner(new Date().addHours(5));
@@ -22,7 +31,9 @@ test('Clean session remove.', () => {
     })
 });
 
-test('Clean session keep.', () => {
+/*Adds a session and preforms a simulated cleanup for 30m past session was added
+  Tests that the session is still valid.*/
+test('Clean session: keep.', () => {
     const id = "testid";
     const session = addUserSession(id)
     sessionsCleaner(new Date().addHours(0.5));
